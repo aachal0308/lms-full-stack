@@ -13,8 +13,6 @@ import courseRouter from './routes/courseRoute.js'
 const app = express()
 
 // Connect to database
-await connectDB()
-await connectCloudinary()
 
 // Middlewares
 app.use(cors())
@@ -28,4 +26,9 @@ app.use('/api/educator', express.json(), educatorRouter)
 app.use('/api/course', express.json(), courseRouter)
 app.use('/api/user', express.json(), userRouter)
 
-export default app
+const initApp = async () => {
+  await connectDB()
+  await connectCloudinary()
+  return app
+}
+export default initApp
